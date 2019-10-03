@@ -147,3 +147,4 @@ jest_*/
 .jscpd/
 
 /build/*
+build/

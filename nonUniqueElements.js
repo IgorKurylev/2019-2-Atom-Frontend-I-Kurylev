@@ -25,12 +25,6 @@ nonUniqueElements([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
  */
 
 export default function nonUniqueElements(data) {
-  let dict = {}
-  for (let i in data) 
-    if (data[i] in dict)
-      dict[data[i]] += 1
-    else
-      dict[data[i]] = 0
-  return data.filter(function(el){return dict[el] > 0})
+  // your solution goes here
+  return data
 }
-

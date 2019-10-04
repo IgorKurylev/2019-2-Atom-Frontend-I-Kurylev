@@ -145,3 +145,5 @@ flow-typed/
 docs/_book/
 jest_*/
 .jscpd/
+
+build/

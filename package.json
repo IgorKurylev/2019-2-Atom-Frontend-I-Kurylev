@@ -98,5 +98,15 @@
   "engines": {
     "npm": ">=6",
     "node": ">=8"
+  },
+  "main": "convertBytesToHuman.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgorKurylev/2019-2-Atom-Frontend-I-Kurylev.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IgorKurylev/2019-2-Atom-Frontend-I-Kurylev/issues"
   }
 }

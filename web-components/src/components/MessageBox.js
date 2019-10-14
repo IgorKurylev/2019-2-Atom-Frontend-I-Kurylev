@@ -36,8 +36,8 @@ template.innerHTML = `
 </style>
 <li>
   <div class="messageBox">
-    <div class="text">Какой-то текст</div>
-    <div class="time">19:05</div>
+    <div class="text"></div>
+    <div class="time"></div>
   </div>
 </li>
 `;
@@ -75,7 +75,10 @@ class MessageBox extends HTMLElement {
       case 'time':
         let date = new Date(Number(newValue));
         date = date.toString().split(' ')[4].split(':');
-        this.$time.innerText = date[0] + ':' + date[1];
+        this.$time.innerText = `${date[0]}:${date[1]}`;
+        break;
+
+      default:
         break;
     }
   }

@@ -80,7 +80,7 @@ class MessageForm extends HTMLElement {
   }
 
   renderPrevMessages() {
-    const currentID = Number(localStorage.getItem(`currentID`));
+    const currentID = Number(localStorage.getItem('currentID'));
 
     for (let i = 0; i <= currentID; i++) {
       const messageBox = JSON.parse(localStorage.getItem(`msg_${i}`));
@@ -99,10 +99,9 @@ class MessageForm extends HTMLElement {
   }
 
   newMessage(owner, text) {
-    let currentID = Number(localStorage.getItem(`currentID`)) + 1;
-    console.log(localStorage.getItem(`currentID`));
+    let currentID = Number(localStorage.getItem('currentID')) + 1;
     if (currentID === null) currentID = 0;
-    localStorage.setItem(`currentID`, currentID);
+    localStorage.setItem('currentID', currentID);
 
     const time = new Date();
     const messageBox = {
@@ -112,7 +111,7 @@ class MessageForm extends HTMLElement {
       time: time.getTime(),
     };
 
-    localStorage.setItem('msg_' + currentID, JSON.stringify(messageBox));
+    localStorage.setItem(`msg_${currentID}`, JSON.stringify(messageBox));
     this.renderMessage(messageBox);
   }
 

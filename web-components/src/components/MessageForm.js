@@ -80,12 +80,14 @@ class MessageForm extends HTMLElement {
   }
 
   renderPrevMessages() {
-    const currentID = Number(localStorage.getItem('currentID'));
-
-    for (let i = 0; i <= currentID; i++) {
-      const messageBox = JSON.parse(localStorage.getItem(`msg_${i}`));
-      if (messageBox != null) this.renderMessage(messageBox);
-    }
+    const msgs = JSON.parse(localStorage.getItem('msgs'));
+    console.log(msgs);
+    if (msgs === null) {
+      console.log("YES");
+      localStorage.setItem('msgs', JSON.stringify(new Array()));
+    } else
+    for(let i = 0; i < msgs.length; i++)
+      this.renderMessage(msgs[i]);
   }
 
   renderMessage(messageBox) {
@@ -99,19 +101,15 @@ class MessageForm extends HTMLElement {
   }
 
   newMessage(owner, text) {
-    let currentID = Number(localStorage.getItem('currentID')) + 1;
-    if (currentID === null) currentID = 0;
-    localStorage.setItem('currentID', currentID);
-
+    let msgs = JSON.parse(localStorage.getItem('msgs'));
     const time = new Date();
     const messageBox = {
-      messageID: currentID,
       owner: ((owner) ? 'companion' : 'self'),
       message: text,
       time: time.getTime(),
     };
-
-    localStorage.setItem(`msg_${currentID}`, JSON.stringify(messageBox));
+    msgs.push(messageBox);
+    localStorage.setItem('msgs',JSON.stringify(msgs));
     this.renderMessage(messageBox);
   }
 

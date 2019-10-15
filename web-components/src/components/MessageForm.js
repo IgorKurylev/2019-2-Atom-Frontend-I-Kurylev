@@ -81,9 +81,7 @@ class MessageForm extends HTMLElement {
 
   renderPrevMessages() {
     const msgs = JSON.parse(localStorage.getItem('msgs'));
-    console.log(msgs);
     if (msgs === null) {
-      console.log("YES");
       localStorage.setItem('msgs', JSON.stringify(new Array()));
     } else
     for(let i = 0; i < msgs.length; i++)

@@ -82,10 +82,10 @@ class MessageForm extends HTMLElement {
   renderPrevMessages() {
     const msgs = JSON.parse(localStorage.getItem('msgs'));
     if (msgs === null) {
-      localStorage.setItem('msgs', JSON.stringify(new Array()));
-    } else
-    for(let i = 0; i < msgs.length; i++)
-      this.renderMessage(msgs[i]);
+      localStorage.setItem('msgs', JSON.stringify([]));
+    } else {
+      for (let i = 0; i < msgs.length; i++) this.renderMessage(msgs[i]);
+    }
   }
 
   renderMessage(messageBox) {
@@ -99,7 +99,7 @@ class MessageForm extends HTMLElement {
   }
 
   newMessage(owner, text) {
-    let msgs = JSON.parse(localStorage.getItem('msgs'));
+    const msgs = JSON.parse(localStorage.getItem('msgs'));
     const time = new Date();
     const messageBox = {
       owner: ((owner) ? 'companion' : 'self'),
@@ -107,7 +107,7 @@ class MessageForm extends HTMLElement {
       time: time.getTime(),
     };
     msgs.push(messageBox);
-    localStorage.setItem('msgs',JSON.stringify(msgs));
+    localStorage.setItem('msgs', JSON.stringify(msgs));
     this.renderMessage(messageBox);
   }
 

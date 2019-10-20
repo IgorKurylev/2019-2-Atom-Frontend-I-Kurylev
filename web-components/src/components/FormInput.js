@@ -88,6 +88,10 @@ class FormInput extends HTMLElement {
     this.$input.setAttribute(name, newValue);
   }
 
+  clearInput() {
+    this.$input.value = '';
+  }
+
   get value() {
     return this.$input.value;
   }

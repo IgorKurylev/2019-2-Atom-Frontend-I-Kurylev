@@ -71,51 +71,35 @@ class MessageForm extends HTMLElement {
 
     this.$input = this.shadowRoot.querySelector('form-input');
     this.$messages = this.shadowRoot.querySelector('.messageWrap');
-
-    this.$input.addEventListener('onSubmit', this.onSendListener.bind(this));
-  }
-
-  connectedCallback() {
-    this.renderPrevMessages();
+    this.$header = this.shadowRoot.querySelector('dialog-info');
   }
 
   renderPrevMessages() {
-    const msgs = JSON.parse(localStorage.getItem('msgs'));
-    if (msgs === null) {
-      localStorage.setItem('msgs', JSON.stringify([]));
-    } else {
-      for (let i = 0; i < msgs.length; i++) this.renderMessage(msgs[i]);
+    const dialogInfo = JSON.parse(localStorage.getItem(`dialogID_${this.dialogID}`));
+    if (dialogInfo == null) { return false; }
+
+    this.$messages.innerHTML = '';
+
+    for (const [messageID, message] of Object.entries(dialogInfo)) {
+      this.renderMessage(messageID, message);
     }
   }
 
-  renderMessage(messageBox) {
+  renderMessage(messageID, messageBox) {
     let elem = document.createElement('message-box');
     elem = this.$messages.appendChild(elem);
 
-    elem.setAttribute('messageID', messageBox.messageID);
-    elem.setAttribute('owner', messageBox.owner);
-    elem.setAttribute('text', messageBox.message);
-    elem.setAttribute('time', messageBox.time);
-  }
-
-  newMessage(owner, text) {
-    const msgs = JSON.parse(localStorage.getItem('msgs'));
-    const time = new Date();
-    const messageBox = {
-      owner: ((owner) ? 'companion' : 'self'),
-      message: text,
-      time: time.getTime(),
-    };
-    msgs.push(messageBox);
-    localStorage.setItem('msgs', JSON.stringify(msgs));
-    this.renderMessage(messageBox);
-  }
-
-  onSendListener() {
-    if (this.$input.value !== '') {
-      this.newMessage(0, this.$input.value);
-      this.$input.setAttribute('value', '');
+    for (const [attr, value] of Object.entries(messageBox)) {
+      elem.setAttribute(attr.toLowerCase(), value);
     }
+  }
+
+  static get observedAttributes() {
+    return ['dialogid'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.dialogID = newValue;
   }
 }
 

@@ -75,16 +75,28 @@ template.innerHTML = `
     right: 30px;
     width: 60px;
     height: 60px;
-    opacity: 0.75;
+    opacity: 0.7;
     background-color: #ffd500;
     border-radius: 30px;
     transition-duration: 0.4s;
     cursor: pointer;
+    animation: pulse 3s infinite;    
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 30px rgba(204,169,44, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    }
   }
 
   .buttonNew:hover{
     opacity: 1.0;
-    animation: none;
   }
 
   .pen{
@@ -94,8 +106,7 @@ template.innerHTML = `
     height: 60px;
     margin: auto;
   }
-
-
+  
   dialog-model{
     display: block;
     overflow: hidden;

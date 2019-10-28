@@ -46,10 +46,29 @@ template.innerHTML = `
     padding: 0 10px 20px 10px;
   }
 
+  message-box.newBox{
+    animation-name: messageBoxAppear;
+    animation-duration: 1s;
+  }
+
   .bottom{
     width: 100%;
     z-index: 1;
   }
+
+  @keyframes messageBoxAppear{
+    from{
+      max-height: 0;
+      opacity: 0;
+      padding 0 0 0 0;
+    }
+    to{
+      max-height: 100%;
+      opacity: 1;
+      padding: 0 10px 20px 10px;
+    }
+
+  
 </style>
 <div class="header">
   <dialog-info></dialog-info>
@@ -85,13 +104,15 @@ class MessageForm extends HTMLElement {
     }
   }
 
-  renderMessage(messageID, messageBox) {
+  renderMessage(messageID, messageBox, newFlag = false) {
     let elem = document.createElement('message-box');
     elem = this.$messages.appendChild(elem);
 
     for (const [attr, value] of Object.entries(messageBox)) {
       elem.setAttribute(attr.toLowerCase(), value);
     }
+
+    if (newFlag) { elem.classList.add('newBox'); }
   }
 
   static get observedAttributes() {

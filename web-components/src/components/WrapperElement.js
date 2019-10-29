@@ -15,17 +15,41 @@ template.innerHTML = `
   }
   message-form{
     z-index: 1;
-    display: none;
+    left: -100%;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
 
   message-form.apear{
-    display: flex;
+    animation-name: appear;
+    //display: flex;
   }
 
   message-form.disapear{
-    display: none;
-    
+    //display: none;
+    animation-name: disappear;
   }
+
+  @keyframes disappear{
+    from{
+      left: 0;
+      opacity: 1;
+    }
+    to{
+      left: -100%;
+      opacity: 0.9;
+    }
+  }
+  @keyframes appear{
+    from{
+      left: -100%;
+      opacity: 0.9;
+    }
+    to{
+      left: 0;
+      opacity: 1;
+    }
 
 </style>
 <div class="wrap">
